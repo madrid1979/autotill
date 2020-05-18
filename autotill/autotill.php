@@ -1,9 +1,58 @@
 <?php 
 
-ini_set('display_errors', 1);
+///*
+ini_set('display_errors', 0);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+//*/
 
+/*
+ * AutoTill is a multi-mode denomination counter in USD.
+ * The three modes are "Casino" (because VEGAS), which 
+ * features large denominations up to 5000 (think in 
+ * terms of casino chips). 
+ * The other two modes are "Standard" which is a typical
+ * retail till consisting of all denominations from $100
+ * to $0.01, and "Small" mode which models a till found
+ * in fast food restaurants: 
+ * (ex. "We do not accept bills larger than $20.") 
+ * 
+ * The standard mode is the default set when
+ * creating a new instance of the AutoTill class:
+ * $my_till = new AutoTill();
+ * 
+ * There are 5 methods; 
+ *  set_mode() takes one string argument; 
+ *    ['casino', 'standard', 'small'], returns true.
+ * 
+ *  get_mode() takes zero arguments and returns the 
+ *    instance setting string value.
+ * 
+ *  calc_change() takes two arguments, the total due and 
+ *    the total paid and calculates the difference.
+ *    it can accept strings like, "$2,632.66" or integers
+ *    or float values like 456.00. It returns the difference
+ *    of the two arguments, including a negative value if
+ *    a balance remains.
+ * 
+ *  count_change() takes one argument; the final value as
+ *    a string, int or float value. In this way, it also works
+ *    like an informal bill breaker. It returns an associative
+ *    array of the count of each denomination from largest 
+ *    to smallest, or a message indicating that a balance remains
+ *    and no change is due.
+ * 
+ *  make_float() is a helper function that is used to sanitize and
+ *    normalize the input values into float typed values. Takes a
+ *    single argument and returns a float (or double, as the case 
+ *    may be) typed value, or zero (or false) if the input cannot 
+ *    be converted.
+ * 
+ *  AutoTill includes an API example that takes two parameters:
+ *    'val' (required): the value to covert into change,
+ *    'mode' (optional): the mode of the conversion. If not provided, 
+ *     the API defaults to "standard" mode.
+ */
 class AutoTill {     
   
   const mode_options  = array('casino', 'standard', 'small');
@@ -22,12 +71,13 @@ class AutoTill {
   /* CONSTRUCTOR */
   public function __construct() { 
     $this->mode = self::mode_options[0]; 
+    set_error_handler( array($this, 'mode_err') );
   } 
 
   /* Member Functions */
 
   # MODE SETTER
-  public function setMode($mode){
+  public function set_mode($mode){
     // Sets $mode string to lowercase 
     $mode = strtolower($mode);
     /*  
@@ -35,15 +85,16 @@ class AutoTill {
      * if not found, throws NOTICE and sets the mode to 'standard'.
      */
     if ( !in_array($mode, self::mode_options) ) {
-      $this->mode_err(8, $mode);
+      trigger_error("'$mode' is not a valid mode; Options are ['standard', 'small', 'casino']. Setting mode to 'standard.'<br />\n", E_USER_NOTICE);
       $this->mode = 'standard';
     } else {
       $this->mode = $mode;
     }
+    return true;
   }
    
   # MODE GETTER
-  public function getMode(){
+  public function get_mode(){
     echo $this->mode;
   }
 
@@ -61,7 +112,7 @@ class AutoTill {
   }
 
   # BILL COUNTER (also doubles as a bill breaker)
-  public function count_bills($balance) {
+  public function count_change($balance) {
     
     // Make sure we're still working with a POSITIVE float value
     $balance = $this->make_float($balance);
@@ -85,36 +136,38 @@ class AutoTill {
       return $change;
     
     } else {
-      return '$balance balance remaining, no change due';
+      return $balance.' balance remaining, no change due.';
     }
   }
 
-  /* Private Members */
-  private function mode_err($errlvl, $modeval) {
-    echo "NOTICE: [$errlvl] '$modeval' not a valid mode; Options are ['standard' <em>(default)</em>, 'small', 'casino']. Setting mode to 'standard.'<br>";
-  }
-
-  /* Converts various string dollar input values to float numbers */
-  private function make_float($input) {
+  # Helper function: Converts various string dollar input values to float numbers
+  public function make_float($input) {
     $removals = '/[,$]/m';
     $input = round(preg_replace(trim($removals), '', $input), 2);
     return $input;
   }
 
+
+  /* Private member functions; error handler */
+  private function mode_err($errlvl, $errmsg) {
+    echo "NOTICE: [$errlvl] : $errmsg";
+    return true;
+  }
+
 }
  
 
-/* TEST CODE */
+/* EXAMPLE TEST CODE *
 $my_till = new AutoTill();  
-$my_till->setMode('casino');
+$my_till->set_mode('craps');
 
-$balance = $my_till->calc_change('$12.19', 200)."<br>";
+//$balance = $my_till->calc_change('$12.19', 100)."<br>";
 $balance = '$234,432,432.44';
 
 echo $balance;
 echo "<pre>";
-print_r($my_till->count_bills($balance));
+print_r($my_till->count_change($balance));
 echo "</pre>";
-
+//*/
 
 ?> 
