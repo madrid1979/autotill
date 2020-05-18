@@ -7,7 +7,8 @@
     <meta name="description" content="AutoTill PHP Library">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-IIED/eyOkM6ihtOiQsX2zizxFBphgnv1zbe1bKA+njdFzkr6cDNy16jfIKWu4FNH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
   </head>
@@ -15,6 +16,32 @@
   <body>
     <div class="main">
       <h1>AutoTill</h1>
+      <div class="box">
+
+        <div class="box__left">
+          <form id="inputs" class="inputs">
+            <label for="price">TOTAL PRICE</label><br>
+            <input name="price" id="price" placeholder="ex: $3,129.24 or 1416.77" />
+            <br><br>
+            <label for="paid">AMOUNT PAID</label><br>
+            <input name="paid" id="paid" placeholder="ex: $3,129.24 or 1416.77">
+            <br><br>
+            <input type="button" class="calc" id="calcChange" value="Calculate my change!">
+            <br><br>
+            <ul class="modeset">
+              <li><input id="casino" type="button" class="mode" value="CASINO MODE"></li>
+              <li><input id="standard" type="button" class="mode" value="STANDARD MODE"></li>
+              <li><input id="small" type="button" class="mode" value="SMALL MODE"></li>
+            </ul>
+          </form>
+          <hr>
+        </div>
+
+        <div class="box__right">
+          <div id="changeTotal" class="changeTotal"></div>
+          <ul id="results" class="dnoms"></ul>
+        </div>
+      </div>
     </div>
 
     <script src="js/vendor/modernizr-3.11.1.min.js"></script>

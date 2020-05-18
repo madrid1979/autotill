@@ -19,7 +19,7 @@ html {
   color: #222;
   font-size: 1em;
   line-height: 1.4;
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: 'Comfortaa', 'Helvetica', sans-serif;
 }
 
 
@@ -100,9 +100,112 @@ textarea {
 
 .main {
   display: flex;
+  flex-direction: column;
   margin: auto;
-  max-width: 1280px;
+  max-width: 960px;
   width: 100%;
+}
+
+.main h1 {
+  width: 100%;
+  font-weight: 700;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+}
+
+.box__left {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+  width: 100%;
+}
+
+.inputs {
+  flex-direction: column;
+}
+
+.inputs input {
+  border-radius: 5px;
+  padding: 5px;
+  width: 90%;
+}
+
+.inputs .calc {
+  background-color: #61d461;
+  border: 0;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px;
+}
+
+.modeset {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.modeset li {
+  display: inline-block;
+  width: 30%;
+}
+
+.modeset .mode {
+  background-color: fuchsia;
+  border: 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px;
+}
+
+.changeTotal {
+  font-size: 24px;
+  margin-bottom: 14px;
+}
+
+.dnoms {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dnoms__5 {
+  color: #fd91fd;
+}
+
+.dnoms__10 {
+  color: #ffe159;
+}
+
+.dnoms__20 {
+  color: #61d461;
+}
+
+.dnoms__50 {
+  color: skyblue;
+}
+
+.dnoms__100 {
+  color: tan;
+}
+
+.dnoms__0-25 {
+  color: gray;
+}
+
+.dnoms__0-10 {
+  color: gray;
+}
+
+.dnoms__0-05 {
+  color: gray;
+}
+
+.dnoms__0-01 {
+  color: #B87333;
 }
 
 
