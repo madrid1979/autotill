@@ -8,6 +8,7 @@ The standard mode is the default set when creating a new instance of the AutoTil
     $my_till = new AutoTill();
  
 There are 5 methods; 
+    
     set_mode() 
 takes one string argument; ['casino', 'standard', 'small'], returns true.
  
