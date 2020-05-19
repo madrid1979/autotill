@@ -1,6 +1,14 @@
 AutoTill
 ========
 
+Example:
+--------
+[https://autotill.mixtape.vegas/](https://autotill.mixtape.vegas/ "AutoTill")
+
+This is a very basic example using the API mode. For speed and simplicity, it's built with rudimentary html/css/javascript and jQuery. 
+
+***
+
 AutoTill is a multi-mode denomination counter in USD. The three modes are "Casino" (because VEGAS), which features large denominations up to 5000 (think in terms of casino chips). The other two modes are "Standard" which is a typical retail till consisting of all denominations from $100
  to $0.01, and "Small" mode which models a till found in fast food restaurants: (ex. "We do not accept bills larger than $20.")
  
