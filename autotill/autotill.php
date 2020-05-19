@@ -1,11 +1,5 @@
 <?php 
 
-///*
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-//*/
-
 /*
  * AutoTill is a multi-mode denomination counter in USD.
  * The three modes are "Casino" (because VEGAS), which 
@@ -155,19 +149,6 @@ class AutoTill {
   }
 
 }
- 
 
-/* EXAMPLE TEST CODE *
-$my_till = new AutoTill();  
-$my_till->set_mode('craps');
-
-//$balance = $my_till->calc_change('$12.19', 100)."<br>";
-$balance = '$234,432,432.44';
-
-echo $balance;
-echo "<pre>";
-print_r($my_till->count_change($balance));
-echo "</pre>";
-//*/
 
 ?> 
